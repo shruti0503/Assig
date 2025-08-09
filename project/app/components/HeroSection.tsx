@@ -9,7 +9,7 @@ const HeroSection = () => {
       </p>
       <div className='text-white flex gap-3'>
        <button className='border-1 p-2 rounded-3xl mt-3  px-4 cursor-pointer'>My Work</button>
-       <button className='border-1 p-2 rounded-3xl mt-3  px-4 text-black bg-white cursor-pointer'>Let's Talk</button>
+       <button className='border-1 p-2 rounded-3xl mt-3  px-4 text-black bg-white cursor-pointer'>Let &apos; Talk</button>
       </div>
     </div>
   )
