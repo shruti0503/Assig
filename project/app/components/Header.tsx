@@ -1,4 +1,13 @@
+'use client'
 import React, { useState } from 'react'
+import { Montserrat } from "next/font/google";
+import { CrossIcon } from 'lucide-react';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+});
 
 const headerOptions = ["ABOUT ME", "PORTFOLIO", "SERVICES", "TESTIMONIALS"]
 
@@ -6,90 +15,69 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header style={{
-      width: '100%',
-      background: '#fff',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000
-    }}>
-      <nav style={{
-        maxWidth: 1200,
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem'
-      }}>
-        {/* Logo */}
-        <div style={{ fontWeight: 700, fontSize: 24, letterSpacing: 2 }}>
-          MyLogo
+    <header className={`w-full text-sm  sticky top-0 z-50  flex ${montserrat.className} bg-[#000000]`}>
+      <nav className=" w-full flex lg:px-10  px-2    items-center justify-between  py-3">
+   
+        <div className="font-bold text-2xl tracking-wider text-white">
+           ERICAJONES
         </div>
-        {/* Desktop Menu */}
-        <ul style={{
-          display: 'flex',
-          gap: '2rem',
-          listStyle: 'none',
-          margin: 0,
-          padding: 0
-        }} className="header-menu">
+      
+        <ul className="hidden md:flex gap-8 list-none m-0 p-0">
           {headerOptions.map(option => (
-            <li key={option} style={{ cursor: 'pointer', fontWeight: 500 }}>
+            <li
+              key={option}
+              className="cursor-pointer font-medium text-white hover:text-yellow-400 transition"
+            >
               {option}
             </li>
           ))}
         </ul>
-        {/* Hamburger Icon */}
+       
         <button
-          className="header-hamburger"
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            fontSize: 28,
-            cursor: 'pointer'
-          }}
+          className="md:hidden text-white text-3xl focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           &#9776;
         </button>
+    
+        <button className="hidden md:block border border-yellow-400 text-yellow-400 px-5 py-2
+        rounded-2xl transition ml-6">
+          GET IN TOUCH
+        </button>
       </nav>
-      {/* Mobile Menu */}
+ 
       {menuOpen && (
-        <ul style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          listStyle: 'none',
-          margin: 0,
-          padding: '1rem',
-          background: '#fff',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-        }} className="header-mobile-menu">
-          {headerOptions.map(option => (
-            <li key={option} style={{ cursor: 'pointer', fontWeight: 500 }}>
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .header-menu {
-            display: none !important;
-          }
-          .header-hamburger {
-            display: block !important;
-          }
-        }
-        @media (min-width: 769px) {
-          .header-mobile-menu {
-            display: none !important;
-          }
-        }
-      `}</style>
+  <div
+    className="md:hidden fixed left-0  w-full px-4 pb-4 z-50"
+    style={{
+      background:
+        "linear-gradient(180deg, rgb(0, 0, 0) 60%, rgb(156, 53, 109) 73.85%, rgb(249, 120, 76) 80%, rgb(252, 214, 139) 90%, rgb(255, 250, 239) 100%)",
+    }}
+  >
+    <ul className="flex flex-col h-full justify-between gap-4 mt-3 list-none m-0 p-0">
+     
+      {headerOptions.map((option,index) => (
+        <li
+          key={option}
+          className="cursor-pointer p-3 font-medium text-lg text-white hover:text-yellow-400 transition"
+        >
+          <div className='flex justify-between'>
+          
+            {option}
+            {
+              index===0 && <CrossIcon  className='text-white cursor-pointer' onClick={()=>setMenuOpen(false)} />
+            }
+          </div>
+          
+        </li>
+      ))}
+      <button className="w-full mt-4 border text-sm bg-white px-5 py-2 rounded-4xl text-black hover:text-black transition">
+        GET IN TOUCH
+      </button>
+    </ul>
+  </div>
+)}
     </header>
   )
 }

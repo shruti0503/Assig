@@ -1,10 +1,32 @@
+'use client'
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
+import { Montserrat } from "next/font/google";
+import Gradient from "./components/Gradient";
+import LoadingScreen from "./components/LoadingScreen";
+
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+   
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <Header />
+    <>
+     {loading && <LoadingScreen />}
+       {
+        !loading && 
+        <div className="bg-black">
+          <Header />
+          <HeroSection />
+          <Gradient />
+        </div>
+       }
+    </>
       
-    </div>
+    
   );
 }
